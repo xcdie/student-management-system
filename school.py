@@ -2,8 +2,8 @@ import sqlite3
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 
 app = Flask(__name__)
-app.secret_key = 'f02488384727217f065be95be39a4a787e896243a61050f7e1794403e0e4a29c'
 
+app.secret_key = 'f02488384727217f065be95be39a4a787e896243a61050f7e1794403e0e4a29c'
 
 USERNAME = 'jamlick'
 PASSWORD = '12345678'
@@ -25,7 +25,6 @@ def init_db():
 init_db()
 
 @app.route('/', methods=['GET', 'POST'])
-
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -40,19 +39,20 @@ def login():
     return render_template('login.html')
 
 @app.route('/dashboard')
-
 def dashboard():
     if not session.get('logged_in'):
         return redirect(url_for('login'))
+        
     conn = sqlite3.connect('school.db')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM students')
     students = cursor.fetchall()
     conn.close()
 
-    return render_template('dashboard.html')
 
-@app.route('/add student'methods = ['GET', 'POST'])
+    return render_template('dashboard.html', students=students)
+
+@app.route('/add_student', methods=['GET', 'POST'])
 def add_student():
     if not session.get('logged_in'):
         return redirect(url_for('login'))
@@ -76,8 +76,8 @@ def add_student():
 @app.route('/logout')
 def logout():
     session.clear()
-    flash('logout succesfuly')
+    flash('Logout successful', 'success')
     return redirect(url_for('login'))
 
-if __name__ == '_main_':
-    app.run(debug=True , port = 5001)
+if __name__ == '__main__':
+    app.run(debug=True, port=5001)

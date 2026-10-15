@@ -9,8 +9,8 @@
         h2 { color: #333; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
-        th { background-color: #007BFF; color: white; }
-        .btn { display: inline-block; padding: 10px 15px; background-color: #28a745; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 15px; }
+        th { background-color: #0f029b; color: white; }
+        .btn { display: inline-block; padding: 10px 15px; background-color: #0982aa; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 15px; }
         .btn-logout { background-color: #dc3545; float: right; }
         .btn:hover { opacity: 0.9; }
     </style>
@@ -18,8 +18,9 @@
 <body>
     <div class="container">
         <h2>Student Management Dashboard</h2>
-        <a href="/add" class="btn">Add New Student</a>
-        <a href="/logout" class="btn btn-logout">Logout</a>
+        
+        <a href="{{ url_for('add_student') }}" class="btn">Add New Student</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-logout">Logout</a>
 
         <table>
             <thead>
